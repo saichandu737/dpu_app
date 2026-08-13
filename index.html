@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#160018">
+  <title>For Deepu ❤️</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient"></div>
+  <div id="hearts"></div>
+
+  <button id="musicBtn" class="music-btn" aria-label="Toggle music">🎵 Music</button>
+
+  <main class="app">
+
+    <section id="welcome" class="screen active">
+      <div class="hero-card glass">
+        <div class="eyebrow">A little something for you</div>
+        <h1>Hey <span>Deepu</span> ❤️</h1>
+        <p class="lead">I made a tiny journey just for you.</p>
+        <p class="muted">A few questions. A few memories. And one little surprise at the end.</p>
+        <button class="btn primary" id="startBtn">Let's Begin 💕</button>
+        <div class="journey">
+          <span class="dot active"></span><i></i><span class="dot"></span><i></i><span class="dot"></span><i></i><span class="dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="screen">
+      <div class="topline">
+        <span id="qCount">Question 1 of 8</span>
+        <span id="qCategory">💕 Us</span>
+      </div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <div class="quiz-card glass">
+        <div class="question-icon" id="questionIcon">❤️</div>
+        <h2 id="questionText"></h2>
+        <div class="answers">
+          <button class="answer yes" id="yesBtn">YES ❤️</button>
+          <button class="answer no" id="noBtn">NO 😏</button>
+        </div>
+        <p class="response" id="response"></p>
+      </div>
+    </section>
+
+    <section id="memoriesIntro" class="screen">
+      <div class="glass centered">
+        <div class="big-icon">📸</div>
+        <div class="eyebrow">Chapter two</div>
+        <h2>Let's relive a few memories</h2>
+        <p class="muted">Now for the part where I get to remind you of some moments I really love.</p>
+        <button class="btn primary" id="memoryStartBtn">Show Memories ✨</button>
+      </div>
+    </section>
+
+    <section id="memories" class="screen">
+      <div class="memory-card glass">
+        <div class="memory-photo-wrap">
+          <img id="memoryImage" src="images/memory1.svg" alt="Memory">
+          <div class="photo-number" id="memoryNumber">1 / 4</div>
+        </div>
+        <div class="memory-copy">
+          <div class="eyebrow">A memory worth keeping</div>
+          <h2 id="memoryTitle"></h2>
+          <p id="memoryText" class="muted"></p>
+          <div class="memory-controls">
+            <button class="btn secondary" id="prevMemory">←</button>
+            <button class="btn primary" id="nextMemory">Next ❤️</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="score" class="screen">
+      <div class="glass centered">
+        <div class="eyebrow">And the result is...</div>
+        <div class="score-heart">❤️<strong id="scoreNumber">0</strong><small>/100</small></div>
+        <h2>Deepu's Love Score</h2>
+        <p id="scoreText" class="muted"></p>
+        <button class="btn primary" id="finalBtn">One Last Question 💖</button>
+      </div>
+    </section>
+
+    <section id="finalQuestion" class="screen">
+      <div class="glass centered final-card">
+        <div class="big-icon">💗</div>
+        <div class="eyebrow">Just one last thing</div>
+        <h2>Deepu...</h2>
+        <p class="final-copy">After all the laughs, silly moments, memories and everything we've shared...</p>
+        <h2 class="question-final">Would you choose me again? ❤️</h2>
+        <div class="answers">
+          <button class="answer yes" id="finalYes">YES, ALWAYS ❤️</button>
+          <button class="answer no" id="finalNo">NO 😶</button>
+        </div>
+        <p class="response" id="finalResponse"></p>
+      </div>
+    </section>
+
+    <section id="celebrate" class="screen">
+      <div class="glass centered">
+        <div class="celebration">🎉</div>
+        <h1>You chose me again! ❤️</h1>
+        <p class="lead">I knew it, Deepu. 😌</p>
+        <p class="muted">Now you've unlocked the message I really wanted you to read.</p>
+        <button class="btn primary" id="secretBtn">Open Your Secret Message 🔐</button>
+      </div>
+    </section>
+
+    <section id="secret" class="screen">
+      <div class="glass secret-wrap">
+        <div class="eyebrow">Unlocked for Deepu</div>
+        <h2>One last message ❤️</h2>
+        <div class="letter">
+          <h3>Dear Deepu,</h3>
+          <p id="secretMessage"></p>
+          <p class="signature">— Yours ❤️</p>
+        </div>
+        <div class="gallery">
+          <img src="images/memory1.svg" alt="Memory">
+          <img src="images/memory2.svg" alt="Memory">
+          <img src="images/memory3.svg" alt="Memory">
+        </div>
+        <h2 class="future">The best is yet to come... 💕</h2>
+        <button class="btn secondary" id="restartBtn">Experience it again ❤️</button>
+      </div>
+    </section>
+
+  </main>
+
+  <audio id="music" loop preload="none">
+    <source src="music/our-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
