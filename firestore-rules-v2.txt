@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /messages/{messageId} {
+      allow read, create: if isMember();
+      allow update: if isMember()
+        && request.resource.data.senderUid == resource.data.senderUid;
+      allow delete: if isMember() && request.auth.uid == resource.data.senderUid;
+    }
+    match /typing/{userId} {
+      allow read: if isMember();
+      allow create, update: if isMember() && request.auth.uid == userId;
+    }
+    function isMember() {
+      return request.auth != null &&
+        (request.auth.uid == "YOUR_UID" || request.auth.uid == "DEEPU_UID");
+    }
+  }
+}
