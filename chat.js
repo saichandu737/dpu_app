@@ -81,8 +81,9 @@ onAuthStateChanged(auth, (u) => {
     if (stopTyping) stopTyping();
   }
 });
+
 function listenMessages() {
-  if (stopMessages) stopMessages();
+    if (stopMessages) stopMessages();
 
     const q = query(
         collection(db, "messages"),
@@ -92,18 +93,28 @@ function listenMessages() {
     stopMessages = onSnapshot(
         q,
         (s) => {
-            const messagesBox = $("#messages");
+            const messagesBox = document.getElementById("messages");
 
-            // Remember whether user was already near the bottom
+            // Safety check
+            if (!messagesBox) {
+                console.error("Messages container not found.");
+                return;
+            }
+
+            // Check whether the user was near the bottom BEFORE rebuilding
             const wasNearBottom =
                 messagesBox.scrollHeight -
                 messagesBox.scrollTop -
                 messagesBox.clientHeight < 100;
 
-            document.querySelectorAll(".bubble-row").forEach(x => x.remove());
+            // Remove old messages
+            messagesBox
+                .querySelectorAll(".bubble-row")
+                .forEach(x => x.remove());
 
             $("#empty").style.display = s.empty ? "flex" : "none";
 
+            // Draw messages
             s.forEach((d) => {
                 const m = d.data();
 
@@ -111,7 +122,7 @@ function listenMessages() {
                 markRead(d.id, m);
             });
 
-            // Only jump to bottom if user was already near bottom
+            // Only scroll automatically if user was already near bottom
             if (wasNearBottom) {
                 messagesBox.scrollTop = messagesBox.scrollHeight;
             }
@@ -122,6 +133,8 @@ function listenMessages() {
         }
     );
 }
+
+
 async function markRead(id, m) {
   const u = auth.currentUser;
   if (!u || m.senderUid === u.uid || m.readBy?.[u.uid]) return;
