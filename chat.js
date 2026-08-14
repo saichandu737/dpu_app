@@ -139,15 +139,23 @@ if (emptyBox) {
 
 
 async function markRead(id, m) {
-  const u = auth.currentUser;
-  if (!u || m.senderUid === u.uid || m.readBy?.[u.uid]) return;
-  try {
-    await updateDoc(doc(db, "messages", id), {
-      [`readBy.${u.uid}`]: serverTimestamp(),
-    });
-  } catch (e) {
-    console.warn("Read receipt:", e);
-  }
+    const u = auth.currentUser;
+
+    if (!u) return;
+
+    // Only mark messages sent by the other person
+    if (m.senderUid === u.uid) return;
+
+    // Already read
+    if (m.readBy && m.readBy[u.uid]) return;
+
+    try {
+        await updateDoc(doc(db, "messages", id), {
+            [`readBy.${u.uid}`]: serverTimestamp()
+        });
+    } catch (e) {
+        console.error("Read receipt:", e);
+    }
 }
 function drawMessage(id, m) {
   const mine = m.senderUid === auth.currentUser?.uid,
