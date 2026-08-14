@@ -3,8 +3,15 @@ import{getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthS
 import{getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp,doc,updateDoc}from"https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 /* KEEP YOUR WORKING FIREBASE CONFIG HERE */
-const firebaseConfig={apiKey:"PASTE_API_KEY",authDomain:"PASTE_PROJECT_ID.firebaseapp.com",projectId:"PASTE_PROJECT_ID",storageBucket:"PASTE_STORAGE_BUCKET",messagingSenderId:"PASTE_SENDER_ID",appId:"PASTE_APP_ID"};
-
+const firebaseConfig = {
+  apiKey: "AIzaSyAOre9fdJKTAVAaAWDic0QtsxnwW6yfQYg",
+  authDomain: "chinnu-7f924.firebaseapp.com",
+  projectId: "chinnu-7f924",
+  storageBucket: "chinnu-7f924.firebasestorage.app",
+  messagingSenderId: "184897170190",
+  appId: "1:184897170190:web:8df0e26952cf1b9038455f",
+  measurementId: "G-DY2BD8E7D8"
+};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),$=id=>document.getElementById(id);
 let signupMode=false,stopMessages=null,firstLoad=true;
 
