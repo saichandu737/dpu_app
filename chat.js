@@ -112,8 +112,11 @@ function listenMessages() {
                 .querySelectorAll(".bubble-row")
                 .forEach(x => x.remove());
 
-            $("#empty").style.display = s.empty ? "flex" : "none";
+const emptyBox = $("#empty");
 
+if (emptyBox) {
+    emptyBox.style.display = s.empty ? "flex" : "none";
+}
             // Draw messages
             s.forEach((d) => {
                 const m = d.data();
