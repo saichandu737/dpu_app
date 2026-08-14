@@ -83,24 +83,44 @@ onAuthStateChanged(auth, (u) => {
 });
 function listenMessages() {
   if (stopMessages) stopMessages();
-  const q = query(collection(db, "messages"), orderBy("createdAt", "asc"));
-  stopMessages = onSnapshot(
-    q,
-    (s) => {
-      document.querySelectorAll(".bubble-row").forEach((x) => x.remove());
-      $("empty").style.display = s.empty ? "flex" : "none";
-      s.forEach((d) => {
-        const m = d.data();
-        drawMessage(d.id, m);
-        markRead(d.id, m);
-      });
-      $("messages").scrollTop = $("messages").scrollHeight;
-    },
-    (e) => {
-      $("status").textContent = "Chat error";
-      console.error(e);
-    },
-  );
+
+    const q = query(
+        collection(db, "messages"),
+        orderBy("createdAt", "asc")
+    );
+
+    stopMessages = onSnapshot(
+        q,
+        (s) => {
+            const messagesBox = $("#messages");
+
+            // Remember whether user was already near the bottom
+            const wasNearBottom =
+                messagesBox.scrollHeight -
+                messagesBox.scrollTop -
+                messagesBox.clientHeight < 100;
+
+            document.querySelectorAll(".bubble-row").forEach(x => x.remove());
+
+            $("#empty").style.display = s.empty ? "flex" : "none";
+
+            s.forEach((d) => {
+                const m = d.data();
+
+                drawMessage(d.id, m);
+                markRead(d.id, m);
+            });
+
+            // Only jump to bottom if user was already near bottom
+            if (wasNearBottom) {
+                messagesBox.scrollTop = messagesBox.scrollHeight;
+            }
+        },
+        (e) => {
+            $("#status").textContent = "Chat error";
+            console.error(e);
+        }
+    );
 }
 async function markRead(id, m) {
   const u = auth.currentUser;
